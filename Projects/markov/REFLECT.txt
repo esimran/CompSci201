@@ -1,0 +1,151 @@
+Simran Singh ss810
+Started 2/15 Finished 2.17 Spent 8.5 Hours
+Discussed with Shyam
+StackOverflow
+I liked the assignment. I thought it was really good practice and is something that's cool and useful.
+
+Alice:
+1 markov model with 200 chars
+total time = 0.171
+5 markov model with 200 chars
+total time = 0.052
+10 markov model with 200 chars
+total time = 0.054
+
+1 markov model with 400 chars
+total time = 0.255
+5 markov model with 400 chars
+total time = 0.110
+10 markov model with 400 chars
+total time = 0.105
+
+1 markov model with 800 chars
+total time = 0.504
+5 markov model with 800 chars
+total time = 0.219
+10 markov model with 800 chars
+total time = 0.215
+
+
+hawthorne:
+1 markov model with 200 chars
+total time = 0.368
+1 markov model with 400 chars
+total time = 1.017
+1 markov model with 800 chars
+total time = 1.325
+
+The larger the training text, the longer the runtime. Hawthorne is about 3 times longer than Alice and the difference
+in runtime is evident from the numerical data provided. The larger the k-value, the less the runtime. This may be because a larger
+k-gram is less likely to occur and there is less time spent searching the text. The larger the max character, the longer the runtime;
+this is self-explanatory as the program may run for longer. Shakespeare is 11 times longer than Hawthorne, and with twice as many
+characters, I would guess about 15 seconds for the run time. For three times the training text length, the time is multiplied by about
+3. 1600 words on Hawthorne would take maybe 2 seconds. 2 times 11 is about 22 seconds.
+
+Alice:
+map total time = 0.037
+5 markov model with 200 chars
+total time = 0.000
+
+map total time = 0.042
+5 markov model with 400 chars
+total time = 0.000
+
+map total time = 0.036
+5 markov model with 800 chars
+total time = 0.001
+
+map total time = 0.033
+5 markov model with 1600 chars
+total time = 0.001
+
+The map times is the vast majority of the time that it takes for the program to run. The times are also relatively constant as
+they only depend on the length of the training text. The second time value is almost 0 as the text generation is not that
+computation heavy, though an increase in time is evident from the shift from .000 to .001 when getting larger max length.
+
+Trump Convention:
+
+My HashCode:
+1 markov model with 2000 words
+total time = 0.064
+2 markov model with 853 words
+total time = 0.023
+3 markov model with 979 words
+total time = 0.040
+4 markov model with 2000 words
+total time = 0.012
+5 markov model with 358 words
+total time = 0.008
+
+Given Method:
+1 markov model with 2000 words
+total time = 0.036
+2 markov model with 853 words
+total time = 0.019
+3 markov model with 979 words
+total time = 0.016
+4 markov model with 2000 words
+total time = 0.016
+5 markov model with 358 words
+total time = 0.016
+
+My method was faster in certain scenarios like the 5 markov model and 4 markov model, but the given one was faster at lower n-grams.
+My HashCodes may be slightly more computationally intensive, but better when the n-grams are larger. 
+
+with k = 5:
+305472 
+53153 
+623571 
+137323 
+693769 
+45504 
+52095 
+101381 
+245971 
+236318 
+
+Average is 249455.7
+
+TreeMap:
+Melville Text:
+14311
+5 markov model with 15000 words
+total time = 0.169
+Trump:
+4409
+5 markov model with 5595 words
+total time = 0.068
+Alice:
+27917
+5 markov model with 15000 words
+total time = 0.234
+kjv10
+753994
+5 markov model with 15000 words
+total time = 5.728
+
+
+Hashmap:
+Melville Text:
+14311
+5 markov model with 15000 words
+total time = 0.118
+Trump:
+4409
+5 markov model with 3331 words
+total time = 0.035
+Alice:
+27917
+5 markov model with 15000 words
+total time = 0.165
+kjv10
+753994
+5 markov model with 15000 words
+total time = 1.835
+
+I have attached a graph of the data called Graph.jpg. The blue line is HashMap and the orange is TreeSet. 
+The shape of the graphs seem to be almost parabolic, but it is hard to tell as the number of keys in kjv10
+is so much larger than the rest of the data types. The HashMap seems to be much faster than the TreeMap. With
+only 1.835 seconds compared to 5.728 seconds of the TreeSet for kjv10, the HashMap continues to beat out the TreeMap.
+This may be because the HashCode is so effective at finding unique values that searching through the map becomes
+easier than searching through the TreeMap even if the TreeMap is sorted.

@@ -1,0 +1,26 @@
+Simran Singh (ss810)
+Started 1/28, finished 1/29
+6.0 Hours Spent
+No resources used, consulted with Shyam Pradheep
+
+Questions:
+For 1000000:
+   x Pos:  	   y Pos:
+ 1.4657e+11  2.9604e+10 -5.8931e+03  2.9226e+04  5.9740e+24    earth.gif
+ 2.2659e+11  2.4055e+10 -2.5502e+03  2.3968e+04  6.4190e+23     mars.gif
+ 3.8636e+10  4.2569e+10 -3.5575e+04  3.2587e+04  3.3020e+23  mercury.gif
+ 2.6827e+04  2.9792e+03  5.1739e-02  8.6585e-03  1.9890e+30      sun.gif
+ 1.0244e+11  3.4391e+10 -1.1156e+04  3.3224e+04  4.8690e+24    venus.gif
+
+For 2000000:
+   x Pos: 	   y Pos:
+ 1.3774e+11  5.8036e+10 -1.1560e+04  2.7494e+04  5.9740e+24    earth.gif
+ 2.2275e+11  4.7841e+10 -5.0730e+03  2.3568e+04  6.4190e+23     mars.gif
+-5.9865e+09  5.7090e+10 -4.8116e+04 -4.4176e+03  3.3020e+23  mercury.gif
+ 1.0223e+05  2.3000e+04  9.6223e-02  3.2991e-02  1.9890e+30      sun.gif
+ 8.5997e+10  6.5196e+10 -2.1191e+04  2.7971e+04  4.8690e+24    venus.gif
+ 
+ At around 1 million timestep value, Mercury seems to get flung out of 
+ the solar system. This is because when the velocity gets updated, the large
+ timestep value causes the velocity to be large enough to escape the 
+ gravitational pull of the sun. 
