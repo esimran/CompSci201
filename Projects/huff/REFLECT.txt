@@ -1,0 +1,183 @@
+Name: Simran Singh partnered with Trishul Nagenalli
+NetID: ss810 and tn74
+Hours Spent: 6.0
+Consulted With: Ramil
+Resources Used: NONE
+Impressions: I thought the assignment was really cool.
+----------------------------------------------------------------------
+Problem 1: Describe testing
+We tested our files using the tester tab provided in the GUI to ensure that all provided files could be properly compressed 
+and decompressed. We checked the frequency count of different characters in the data and the compression rate to ensure that 
+a more highly concentrated frequency count for the file's characters did lead to better compression rates. We also used this 
+information when testing if tiff images or text files compressed better.
+
+Following testing with given files, we ran our own tests with edge cases and ascertained compression rates 
+to see if they made sense. We compressed/decompressed a file that consisted entirely of a single repeated character. Because 
+there is only one character repeated several times, we expect compression to be very high since the Huffman tree is essentially 
+encoding that character with one bit. The compression rate for such a file should approach 88.5% (8:1 compression) as the length 
+of the file approaches infinity, we were getting compression rates just above above 80%
+
+We next tested with files that had 0 and 1 character(s) respectively. We discovered that a file with one character worked fine 
+in our program though it did have a terrible compression rate. Rather than have the single character be represented by one 
+byte, it had to be represented by 7 so the Huffman tree could be stored before it. This is expected as Huffman compression 
+is rather unnecessary for a file that is only one character long. The empty file initially crashed our  program, which we 
+resolved by treating an empty file as an outlier case that would throw a HuffException.
+
+
+Problem 2: Benchmark and analyze your code
+
+For Calgary:
+AlphFreq: 82
+AlphFreq: 83
+AlphFreq: 97
+AlphFreq: 257
+AlphFreq: 99
+AlphFreq: 257
+AlphFreq: 257
+AlphFreq: 96
+AlphFreq: 92
+AlphFreq: 85
+AlphFreq: 94
+AlphFreq: 160
+AlphFreq: 93
+AlphFreq: 88
+AlphFreq: 90
+AlphFreq: 100
+File Length: 111261
+Compresion Rate: 0.34496364404418445
+File Length: 768771
+Compresion Rate: 0.41891317588451327
+File Length: 610856
+Compresion Rate: 0.40987183477229683
+File Length: 102400
+Compresion Rate: 0.4020340327674595
+File Length: 377109
+Compresion Rate: 0.39135717319910657
+File Length: 21504
+Compresion Rate: 0.38968904579093033
+File Length: 246814
+Compresion Rate: 0.3701141056364924
+File Length: 53161
+Compresion Rate: 0.37011862770935255
+File Length: 82199
+Compresion Rate: 0.37181512799721994
+File Length: 46526
+Compresion Rate: 0.3725706962857571
+File Length: 38105
+Compresion Rate: 0.3724690955323654
+File Length: 513216
+Compresion Rate: 0.44490770619148146
+File Length: 39611
+Compresion Rate: 0.44355947618704494
+File Length: 71646
+Compresion Rate: 0.4425078790430267
+File Length: 49379
+Compresion Rate: 0.44160906198704064
+File Length: 93695
+Compresion Rate: 0.43756642767941634
+
+
+
+For Waterloo:
+AlphFreq: 231
+AlphFreq: 156
+AlphFreq: 231
+AlphFreq: 257
+AlphFreq: 254
+AlphFreq: 21
+AlphFreq: 257
+AlphFreq: 19
+AlphFreq: 250
+AlphFreq: 117
+AlphFreq: 186
+AlphFreq: 227
+AlphFreq: 25
+AlphFreq: 227
+AlphFreq: 227
+AlphFreq: 254
+AlphFreq: 118
+AlphFreq: 256
+AlphFreq: 252
+AlphFreq: 238
+AlphFreq: 249
+AlphFreq: 21
+AlphFreq: 18
+AlphFreq: 254
+AlphFreq: 51
+AlphFreq: 188
+File Length: 262274
+Compresion Rate: 0.06235844956038339
+File Length: 65666
+Compresion Rate: 0.07893517106787828
+File Length: 262274
+Compresion Rate: 0.0905214041008855
+File Length: 65666
+Compresion Rate: 0.08469689577361716
+File Length: 65666
+Compresion Rate: 0.08725708409443056
+File Length: 65666
+Compresion Rate: 0.14319395537669655
+File Length: 2149096
+Compresion Rate: 0.07761447368600294
+File Length: 65666
+Compresion Rate: 0.09495118878444653
+File Length: 333442
+Compresion Rate: 0.10647037730825781
+File Length: 309388
+Compresion Rate: 0.12919953994782707
+File Length: 3706306
+Compresion Rate: 0.2706247083773743
+File Length: 65666
+Compresion Rate: 0.26873833050910534
+File Length: 65666
+Compresion Rate: 0.2738776992858748
+File Length: 163458
+Compresion Rate: 0.2736700715416105
+File Length: 262274
+Compresion Rate: 0.2671126103193986
+File Length: 1179784
+Compresion Rate: 0.240192791383939
+File Length: 307330
+Compresion Rate: 0.23946940210880174
+File Length: 786568
+Compresion Rate: 0.22394345392431403
+File Length: 1179784
+Compresion Rate: 0.20904772550441664
+File Length: 1498414
+Compresion Rate: 0.21357569727156667
+File Length: 65666
+Compresion Rate: 0.21275712300746108
+File Length: 65666
+Compresion Rate: 0.21587134736817148
+File Length: 65666
+Compresion Rate: 0.21911408486387285
+File Length: 1179784
+Compresion Rate: 0.20408930748376952
+File Length: 262274
+Compresion Rate: 0.21189652330384412
+File Length: 262274
+Compresion Rate: 0.20967661297883722
+
+For a fixed alphabet size and varying file length, the compression rate was largely unchanged. This data suggests
+that file length does not heavily influence the compression rate. This held true for waterloo and calgary.
+The alphabet size, however, did result in changes to the compression rate in both tests. The greater the alphabet size,
+the slower the compression. This makes sense as file length does not influence the tree size and hence the compression,
+but a wide range of characters increases the tree size, thus decreasing compression rate.
+Conversely, for time (not shown, but was evaluated in huffviewer), the larger the file length,
+the greater the time, and time was indifferent with respect to alphabet size. For time, file length matters as it takes
+more time to traverse the bit stream, but the time to traverse to 0s and 1s is the same regardless of the actual value
+of the bits.
+
+Problem 3: Text vs. Binary 
+
+The Binary files compressed about 21%, while the text compressed about 44%. The Binary files have a wider variety of 
+character use than text files. This results in more branches (on average) in the tree and therefore less compression. As the data
+clearly shows, the more variety in characters, the worse the compression.
+
+Problem 4: Compressing compressed files
+
+Generally, no extra compression is achived by compressing a compressed file again, for our case, it was consistently worse
+by about .65% every time we tried to comrpess again for the Melville text specifically.
+For Huffman coding, compressing an already compressed file is inefficient as the second compression will try to
+compress the header that was written for the first compression. This results in larger files than the original compression.
+This trend continues as you constantly attempt to compress files that are already compressed by a Huffman method.

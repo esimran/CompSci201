@@ -1,0 +1,103 @@
+Name: Simran Singh
+NetID: ss810
+Hours Spent: 6.5
+Consulted With: Shyam, Andy
+Resources Used: NONE
+Impressions: It was pretty cool.\
+----------------------------------------------------------------------
+Problem 1: What is the order of growth (big-Oh) of the number of compares
+(in the worst case) that each of the operations in the Autocomplete data
+type make, as a function of the number of terms N, the number of matching
+terms M, and k, the number of matches returned by topKMatches for
+BinarySearchAutocomplete?
+
+firtIndexOf and lastIndexOf are logN as binary search is log base. It splits the data in half everytime.
+adding to a priorty queue is Mlogk, and for removing fom a priorty queue it is KlogM, because of this, the total run time would be
+O(Mlogk+logN)
+
+Problem 2: How does the runtime of topKMatches() vary with k, assuming a fixed prefix
+and set of terms? 
+2A BruteAutocomplete:
+We go through the loop K times removing from a priorty queue that is size K, so the big O time is (KlogK)
+2B BinarySearchAutocomplete:
+We go through the loop K times removing from a priorty queue that is size K, so the big O time is (KlogK)
+2C TrieAutocomplete:
+It goes through the loop a constant number of times to remove from a priorty queue that is size k, so only O(logk)
+
+Problem 3: Look at the methods topMatch and topKMatches in BruteAutocomplete and
+BinarySearchAutocomplete and compare both their theoretical and empirical
+runtimes. Is BinarySearchAutocomplete always guaranteed to perform better
+than BruteAutocomplete? Justify your answer.
+
+Benchmarking BruteAutocomplete...
+Found 333333 words
+Time to initialize - 0.10138998
+Time for topMatch("") - 0.003783393311
+Time for topMatch("khombu") - 0.00517855284679089
+Time for topMatch("k") - 0.003405551237
+Time for topMatch("kh") - 0.00307652037
+Time for topMatch("notarealword") - 0.002521461205
+Time for topKMatches("", 1) -  0.002511387221
+Time for topKMatches("", 4) -  0.002507105125
+Time for topKMatches("", 7) -  0.002656474757
+Time for topKMatches("khombu", 1) -  0.003408454226
+Time for topKMatches("khombu", 4) -  0.003364395636
+Time for topKMatches("khombu", 7) -  0.003360492782
+Time for topKMatches("k", 1) -  0.002754522886
+Time for topKMatches("k", 4) -  0.002600027771
+Time for topKMatches("k", 7) -  0.002617123468
+Time for topKMatches("kh", 1) -  0.002683788629
+Time for topKMatches("kh", 4) -  0.003179936006
+Time for topKMatches("kh", 7) -  0.002759938734
+Time for topKMatches("notarealword", 1) -  0.003548901253
+Time for topKMatches("notarealword", 4) -  0.004426948401
+Time for topKMatches("notarealword", 7) -  0.003387576207
+
+Benchmarking BinarySearchAutocomplete...
+Found 333333 words
+Time to initialize - 0.898791057
+Time for topMatch("") - 0.002973933192
+Time for topMatch("khombu") - 1.7005368E-5
+Time for topMatch("k") - 1.02186772E-4
+Time for topMatch("kh") - 1.195145E-6
+Time for topMatch("notarealword") - 1.6161148E-5
+Time for topKMatches("", 1) -  0.1072708379787234
+Time for topKMatches("", 4) -  0.10143081818
+Time for topKMatches("", 7) -  0.10319548946938775
+Time for topKMatches("khombu", 1) -  2.767178E-6
+Time for topKMatches("khombu", 4) -  2.1572E-6
+Time for topKMatches("khombu", 7) -  1.97397E-6
+Time for topKMatches("k", 1) -  0.001616918757
+Time for topKMatches("k", 4) -  0.001753704744
+Time for topKMatches("k", 7) -  0.001768294797
+Time for topKMatches("kh", 1) -  2.13591E-5
+Time for topKMatches("kh", 4) -  1.2184293E-5
+Time for topKMatches("kh", 7) -  1.4242008E-5
+Time for topKMatches("notarealword", 1) -  1.492187E-6
+Time for topKMatches("notarealword", 4) -  1.615264E-6
+Time for topKMatches("notarealword", 7) -  1.61011E-6
+
+TopKMatches
+Binary (O(Mlogk+logN)) should always be faster than Brute (O(Mlogk+N)) as logN is always smaller than N for integers greater than 0.
+Binary has the logN because it cuts the possible matches in half every time, but brute runs through the entire array. 
+
+TopKMatches
+Binary (O(logN + m)) should always be faster than brute (O(n)) as brute runs through the entire list to find max, while 
+Binary using first/lastIndox of (logN) and runs through those indices to find max (m). 
+
+Empirically, this the theoretical outcomes hold true, except for when the prefix is an empty string, then the brute is faster.
+This is because the binary search still goes through halving the total entires, while brute can quickly compare to empty strings
+and find the appropriate value.
+
+Problem 4: For all three of the Autocompletor implementations, how does increasing the
+size of the source and increasing the size of the prefix argument affect
+the runtime of topMatch and topKMatches? 
+4A BruteAutocomplete:
+Source: Linearly, as the size increases, the brute has to go through that many more terms.
+Prefix: Doesn't change as it takes O(1) with the startswith method
+4B BinarySearchAutocomplete:
+Source: Run time increases with logN as it thats the run time for firstIndexOf and lastIndexOf
+Prefix: Doesn't change as it takes O(1) with the startswith method
+4C TrieAutocomplete:
+Source: Run time increases with logN as it thats the run time for firstIndexOf and lastIndexOf
+Prefix: Decreased by proportion of increase in prefix length as you loop through more characters, but have to search through less nodes.
